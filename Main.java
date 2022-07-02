@@ -12,6 +12,39 @@ public class Main {
 			
 	}
 	
+	// a method that lets users choose between multiple options
+	private static int input(int cnt, String text) {
+		
+		boolean exit = false;
+		int mode = 0;
+		
+		while (!exit) {
+			
+			System.out.println(text);
+			
+			boolean flag = false;
+
+			mode = Integer.parseInt(scan.nextLine());
+			
+			for (int i = 1; i <= cnt; i++) {
+				if (mode == i)
+					flag = true;
+			}
+			
+			if (!flag) {
+				System.out.println("Wrong input.\nTry again.");
+				continue;		
+			}
+			
+			exit = true;
+			break;
+			
+		}
+		
+		return mode;
+		
+	}	
+	
 }
 
 
