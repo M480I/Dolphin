@@ -23,8 +23,12 @@ public class Main {
 			System.out.println(text);
 			
 			boolean flag = false;
-
-			mode = Integer.parseInt(scan.nextLine());
+			
+			try {
+				mode = Integer.parseInt(scan.nextLine());
+			}
+			catch(Exception e) {
+			}
 			
 			for (int i = 1; i <= cnt; i++) {
 				if (mode == i)
