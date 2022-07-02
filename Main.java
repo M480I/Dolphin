@@ -61,3 +61,11 @@ class Student extends Person {
   }
 }
 
+class Teacher extends Person {
+
+  private String rank;
+
+  public Teacher(String username, String password, String name, String rank) {
+    super(username, password, name);
+    this.rank = rank;
+  }
