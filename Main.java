@@ -45,3 +45,11 @@ class Person{
 
 	
 }
+
+class Principal extends Person {
+
+  public Principal(String username, String password, String name) {
+    super(username, password, name);
+    
+  }
+}
