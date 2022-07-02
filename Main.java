@@ -69,3 +69,6 @@ class Teacher extends Person {
     super(username, password, name);
     this.rank = rank;
   }
+	
+	
+}
