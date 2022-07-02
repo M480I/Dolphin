@@ -12,6 +12,36 @@ public class Main {
 			
 	}
 	
+	//entry method
+	private static void enter() {
+		
+
+		int mode = input(2, "1 - Sign up\n2 - Sign in\nChoose:");
+
+		if (mode == 1) {
+			signUp();
+		}
+		else
+			signIn();
+
+
+	}
+	
+	private static void signIn() {
+		
+		int mode = input(3, "1 - Student\n2 - Teacher\n3 - Principal");
+		
+		
+
+	}
+
+	private static void signUp() {
+		
+		int mode = input(3, "1 - Student\n2 - Teacher\n3 - Principal");
+
+		
+	}
+	
 	// a method that lets users choose between multiple options
 	private static int input(int cnt, String text) {
 		
