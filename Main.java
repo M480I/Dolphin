@@ -22,6 +22,12 @@ class Person{
 	private String password;
 	private String name;
 	
+	public Person(String username, String password, String name) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.name = name;
+	}
 	
 	public String getUsername() {
 		return username;
