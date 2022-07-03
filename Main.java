@@ -7,16 +7,16 @@ public class Main {
 	static public Scanner scan = new Scanner(System.in);
 
 	public static void main(String[] args) {
-		
 
-			
-	}
 	
+
+	}
+
 	//entry method
 	private static void enter() {
-		
 
-		int mode = input(2, "1 - Sign up\n2 - Sign in\nChoose:");
+
+		int mode = inputOption(2, "1 - Sign up\n2 - Sign in\nChoose:");
 
 		if (mode == 1) {
 			signUp();
@@ -26,59 +26,59 @@ public class Main {
 
 
 	}
-	
+
 	private static void signIn() {
-		
-		int mode = input(3, "1 - Student\n2 - Teacher\n3 - Principal");
-		
-		
+	
+		int mode = inputOption(3, "1 - Student\n2 - Teacher\n3 - Principal");
 
 	}
 
 	private static void signUp() {
-		
-		int mode = input(3, "1 - Student\n2 - Teacher\n3 - Principal");
 
-		
+		int mode = inputOption(3, "1 - Student\n2 - Teacher\n3 - Principal");
+
+
 	}
-	
+
 	// a method that lets users choose between multiple options
-	private static int input(int cnt, String text) {
-		
+	private static int inputOption(int cnt, String text) {
+
 		boolean exit = false;
 		int mode = 0;
-		
+
 		while (!exit) {
-			
+
 			System.out.println(text);
-			
+
 			boolean flag = false;
-			
+
 			try {
 				mode = Integer.parseInt(scan.nextLine());
 			}
 			catch(Exception e) {
 			}
-			
+
 			for (int i = 1; i <= cnt; i++) {
 				if (mode == i)
 					flag = true;
 			}
-			
+
 			if (!flag) {
 				System.out.println("Wrong input.\nTry again.");
 				continue;		
 			}
-			
+
 			exit = true;
 			break;
-			
+
 		}
-		
+
 		return mode;
-		
-	}	
-	
+
+	}
+
+
+
 }
 
 
