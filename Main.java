@@ -147,3 +147,38 @@ class Teacher extends Person {
 }
 
 
+class Course {
+	
+
+	private String name;
+	private int capacity;
+	private Teacher teacher;
+	private String id;
+		
+	public Course(String id, String name, int capacity, Teacher teacher) {
+		this.id = id;
+		this.name = name;
+		this.capacity = capacity;
+		this.teacher = teacher;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public int getCapacity() {
+		return capacity;
+	}
+
+	public Teacher getTeacher() {
+		return teacher;
+	}
+
+
+	public String getId() {
+		return id;
+	}	
+	
+	
+	
+}
