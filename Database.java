@@ -2,7 +2,7 @@ import java.sql.*;
 import java.util.*;
 
 class Database {
-		
+	//configuring and connecting to our database	
 	static String url = "jdbc:mysql://localhost:3306/universitydb";
 	static String username = "root";
 	static String password = "1234";
@@ -34,6 +34,7 @@ class Database {
 		
 	}
 	
+	//inserts a person to database
 	static void insertPerson(Person p) {	
 		
 		try {
@@ -50,6 +51,7 @@ class Database {
 				
 	}
 	
+	//inserts a course to database
 	static void insertCourse(Course c) {
 		
 		try {
@@ -61,6 +63,7 @@ class Database {
 		
 	}
 	
+	//removes a person from database
 	static void deletePerson(Person p) {
 		
 		
@@ -73,6 +76,7 @@ class Database {
 		
 	}
 	
+	//outputs all persons in the related table of database
 	static void getAll(int mode) {
 		
 		String modeStr = "";
@@ -112,7 +116,7 @@ class Database {
 		
 	}
 	
-	
+	//changes an accounts password
 	static void changePassword(Person p) {
 		
 		try {
@@ -123,6 +127,7 @@ class Database {
 		
 	}
 	
+	//lists a student's grades with given username
 	static void checkGrades(String username) {
 		
 		ResultSet res;
@@ -138,4 +143,104 @@ class Database {
 		
 	}
 	
+	//adds a student to a course
+	static void takeCourse(String username, Course c) {
+		
+		
+		try {
+			
+			ResultSet res = stat.executeQuery("select max(id) from grade");
+			res.next();
+			int gradeID = res.getInt("max(id)");
+			gradeID++;
+
+			ResultSet res2 = stat1.executeQuery("select * FROM course WHERE (`ID` = '" + c.getId() + "')");
+			res2.next();
+			int capacityNum = res2.getInt("Capacity");
+			
+			stat.executeUpdate("INSERT INTO grade VALUES ('" + c.getId() + "', '" + username + "', '" + c.getTeacher().getUsername() + "', " + 0f + ", " + gradeID + ");");
+			stat.executeUpdate("UPDATE `course` SET `Capacity` = '" + (capacityNum - 1) + "' WHERE (`ID` = '" + c.getId() + "');");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	//getting Teacher_ID of course 'id'
+	static String getTeacherID(String id) {
+		ResultSet res;
+		 try {
+			res = stat.executeQuery("select * FROM course WHERE (`ID` = '" + id + "')");
+			while(res.next()) {
+				return res.getString("Teacher_ID");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		 return "";
+	}
+	
+	static void checkCourses(String username) {
+		
+		ResultSet res;
+		
+		 try {
+			res = stat.executeQuery("select * FROM course WHERE (`Teacher_ID` = '" + username + "')");
+			while(res.next()) {
+				System.out.println(res.getString("ID") + " : " + res.getString("Name"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	//lists all students of a teacher
+	static void viewStudents(String username) {
+		
+		ArrayList<String> output = new ArrayList<>();
+		
+		ResultSet res;
+		
+		try {
+			res = stat.executeQuery("select * FROM grade WHERE (`Teacher_ID` = '" + username + "')");
+			
+			while(res.next()) {
+				
+				String courseId = res.getString("Course_ID");
+				String studentId = res.getString("Student_ID");
+				
+				ResultSet res2 = stat1.executeQuery("select * FROM student WHERE (`ID` = '" + studentId + "')");
+				res2.next();
+				String studentName = res2.getString("Name");
+				res2 = stat1.executeQuery("select * FROM course WHERE (`ID` = '" + courseId + "')");
+				res2.next();
+				String courseName = res2.getString("Name");
+				
+				output.add(courseName + " | " + courseId + " : " + studentName + " | " + studentId);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		Collections.sort(output);
+		
+		for(String x: output) {
+			System.out.println(x);
+		}
+		
+		
+	}
+	 
+	//inset a grade in the related table
+	static void insertGrade(String username, String id, float grade) {
+		
+		try {
+			stat.executeUpdate("UPDATE grade SET `Grade` = " + grade + " WHERE Student_ID = '" + username + "' AND Course_ID = '" + id + "';");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
 }
