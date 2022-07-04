@@ -208,12 +208,13 @@ class Person{
 	
 }
 
-class Principal extends Person {
-
-  public Principal(String username, String password, String name) {
-    super(username, password, name);
-    
-  }
+class Manager extends Person {
+	
+	static Scanner scan = new Scanner(System.in);
+	
+	public Manager(String username, String password, String name) {
+		super(username, password, name);
+	}
 }
 
 class Student extends Person {
