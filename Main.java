@@ -322,6 +322,22 @@ class Manager extends Person {
 		System.out.println("Adding was successful.");
 		UI(mUsername);
 	}
+	
+	private static void removePerson(int mode, String mUsername) {
+		
+		System.out.println("Enter a username:");
+		String username = scan.nextLine();
+		
+		if(mode == 1) {
+			Database.deletePerson(new Student(username, "", ""));
+		}
+		else {
+			Database.deletePerson(new Teacher(username, "", "", ""));
+		}
+		
+		System.out.println("This username is no longer in database.");
+		UI(mUsername);
+	}
 }
 
 class Student extends Person {
