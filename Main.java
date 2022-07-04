@@ -388,6 +388,48 @@ class Student extends Person {
     super(username, password, name);
     
   }
+	
+	// brings the UI after signing in with student role
+	public static void UI(String username) {
+		
+		int mode = Main.inputOption(5,
+				  "\n\n"
+				+ "1 - List courses\n"
+				+ "2 - take course\n"
+				+ "3 - check grades\n"
+				+ "4 - Change password\n"
+				+ "5 - Log out\n"
+				+ "Choose:");
+		
+		switch (mode) {
+			
+		case 1:
+			getAllCourses(username);
+			break;
+	
+		case 2:
+			takeCourse(username);
+			break;
+			
+		case 3:
+			checkGrades(username);
+			break;		
+			
+		case 4:
+			changePass(username);
+			break;			
+
+		case 5:
+			System.out.println("loging out...");
+			System.out.println("\n\n");
+			Main.enter();
+			break;			
+		
+		}
+		
+		
+	}
+	
 }
 
 class Teacher extends Person {
