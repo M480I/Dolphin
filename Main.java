@@ -1,15 +1,19 @@
 import java.util.*;
 
+
 public class Main {
 	
 	static public Scanner scan = new Scanner(System.in);
 
 	public static void main(String[] args) {
-
-	
-
+		
+		enter();
+		
+		
+		System.out.println("Thanks for using our service :)))");
+			
 	}
-
+		
 	// this method brings the entry page 	
 	static void enter() {
 		
@@ -24,8 +28,7 @@ public class Main {
 		
 
 	}
-
-
+	
 	// a method for signing in
 	private static void signIn() {
 		
@@ -63,7 +66,6 @@ public class Main {
 
 	}
 	
-
 	//a method for signing up
 	private static void signUp() {
 		
@@ -76,28 +78,8 @@ public class Main {
 			System.out.println("\n\n");
 			enter();
 			return;
-			}
-		System.out.println("Enter your password:");
-		String password = scan.nextLine();
-		
-		
-		if (Database.checkAccount(username, password, mode) == false) {
-			System.out.println("Incorrect password. Try again.");
-			System.out.println("\n\n");
-			enter();
-			return;
 		}
-		
-		if (mode == 1) {
-			Student.UI(username);
-		}
-		if (mode == 2) {
-			Teacher.UI(username);
-		}
-		if (mode == 3) {
-			Manager.UI(username);
-		}
-		}
+
 	
 		System.out.println("Enter a password:");
 		String password = scan.nextLine();
@@ -120,43 +102,44 @@ public class Main {
 		enter();
 		
 	}
-
-	// a method that lets users choose between multiple options
-	private static int inputOption(int cnt, String text) {
-
+	
+	//a method that takes user's choice between cnt number of options
+	static int inputOption(int cnt, String text) {
+		
 		boolean exit = false;
 		int mode = 0;
-
+		
 		while (!exit) {
-
+			
 			System.out.println(text);
-
+			
 			boolean flag = false;
-
+			
 			try {
 				mode = Integer.parseInt(scan.nextLine());
 			}
 			catch(Exception e) {
 			}
-
+			
 			for (int i = 1; i <= cnt; i++) {
 				if (mode == i)
 					flag = true;
 			}
-
+			
 			if (!flag) {
 				System.out.println("Wrong input.\nTry again.");
 				continue;		
 			}
-
+			
 			exit = true;
 			break;
-
+			
 		}
-
+		
 		return mode;
-
+		
 	}
+	
 	static String pModeToString(int mode) {
 		if (mode == 1)
 			return "Student";
@@ -165,6 +148,7 @@ public class Main {
 		return "Manager";
 		
 	}
+	
 	static String rModeToString(int mode) {
 		if (mode == 1)
 			return "Assistant Professor";
@@ -173,16 +157,16 @@ public class Main {
 		return "Professor";
 	}
 
-
 }
 
 
-//class person is supercalss of Teacehr and Student and Principal
+
 class Person{
 	
 	private String username;
 	private String password;
 	private String name;
+	
 	
 	public Person(String username, String password, String name) {
 		super();
@@ -190,6 +174,7 @@ class Person{
 		this.password = password;
 		this.name = name;
 	}
+	
 	
 	public String getUsername() {
 		return username;
@@ -383,11 +368,14 @@ class Manager extends Person {
 	
 }
 
+
 class Student extends Person {
-  public Student(String username, String password, String name) {
-    super(username, password, name);
-    
-  }
+	
+	static Scanner scan = new Scanner(System.in);
+	
+	public Student(String username, String password, String name) {
+		super(username, password, name);
+	}
 	
 	// brings the UI after signing in with student role
 	public static void UI(String username) {
@@ -429,7 +417,7 @@ class Student extends Person {
 		
 		
 	}
-	
+
 	private static void takeCourse(String username) {
 		
 		System.out.println("Enter an ID:");
@@ -464,11 +452,12 @@ class Student extends Person {
 		UI(username);
 		
 	}
-	
+
 	private static void checkGrades(String username) {
 		Database.checkGrades(username);
 		UI(username);
 	}
+
 	private static void changePass(String username) {
 		System.out.println("Enter a password:");
 		String password = scan.nextLine();
@@ -477,17 +466,18 @@ class Student extends Person {
 		System.out.println("Your password is updated.");
 		UI(username);		
 	}
+
 	private static void getAllCourses(String username) {
 		Database.getAll(2);
 		UI(username);
 	}
 	
-
-
-	
 }
 
+
 class Teacher extends Person {
+	
+	static Scanner scan = new Scanner(System.in);
 
 	private String rank;
 
@@ -496,10 +486,11 @@ class Teacher extends Person {
 		this.rank = rank;
 		
 	}
-
+	
 	public String getRank() {
 		return rank;
 	}
+	
 	// brings the UI after signing in with teacher role
 	public static void UI(String username) {
 		
@@ -539,6 +530,7 @@ class Teacher extends Person {
 		}
 		
 	}
+
 	private static void getAllCourses(String username) {	
 		Database.checkCourses(username);
 		UI(username);
@@ -548,6 +540,7 @@ class Teacher extends Person {
 		Database.viewStudents(username);
 		UI(username);
 	}
+
 	private static void gradeStudent(String tUsername) {
 		
 		System.out.println("Enter the course's ID:");
@@ -588,7 +581,8 @@ class Teacher extends Person {
 		UI(tUsername);
 		
 	}
-		private static void changePass(String username) {
+
+	private static void changePass(String username) {
 		System.out.println("Enter a password:");
 		String password = scan.nextLine();
 		
@@ -596,10 +590,8 @@ class Teacher extends Person {
 		System.out.println("Your password is updated.");
 		UI(username);			
 	}
-
 	
 }
-
 
 class Course {
 	
@@ -632,7 +624,5 @@ class Course {
 	public String getId() {
 		return id;
 	}	
-	
-	
 	
 }
