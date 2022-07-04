@@ -289,6 +289,39 @@ class Manager extends Person {
 	System.out.println("Your password is updated.");
 	UI(username);
 	}
+	
+	private static void addCourse(String mUsername) {
+		
+		System.out.println("Enter an ID:");
+		String ID = scan.nextLine();
+		
+		if (Database.isNewCourse(ID) == false) {
+			System.out.println("The same ID already exists. Try again.");
+			System.out.println();
+			UI(mUsername);
+			return;
+		}
+		
+		System.out.println("Enter a name:");
+		String name = scan.nextLine();
+		System.out.println("Enter the capacity:");
+		int capacity = Integer.parseInt(scan.nextLine());
+		
+		System.out.println("Enter the teacher's name:");
+		String teacherName = scan.nextLine();
+		System.out.println("Enter the teacher's username:");
+		String teacherUsername = scan.nextLine();
+		
+		Teacher t = new Teacher(teacherUsername, "", teacherName, "");
+		
+		
+		Course c = new Course(ID, name, capacity, t);
+		
+		Database.insertCourse(c);
+		
+		System.out.println("Adding was successful.");
+		UI(mUsername);
+	}
 }
 
 class Student extends Person {
