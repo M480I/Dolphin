@@ -338,6 +338,35 @@ class Manager extends Person {
 		System.out.println("This username is no longer in database.");
 		UI(mUsername);
 	}
+	
+	private static void addPerson(int mode, String mUsername) {
+
+		System.out.println("Enter a username:");
+		String username = scan.nextLine();
+		if (Database.isNew(username, mode) == false) {
+			System.out.println("The same username already exists. Try again.");
+			System.out.println();
+			UI(mUsername);
+			return;
+		}
+
+		System.out.println("Enter a password:");
+		String password = scan.nextLine();
+		System.out.println("Enter the name:");
+		String name = scan.nextLine();
+
+		if (mode == 2) {
+			int rankMode = Main.inputOption(3, "1 - Assistant Professor\n2 - Associate Professor\n3 - Professor\nChoose:");
+			Database.insertPerson(new Teacher(username, password, name, Main.rModeToString(rankMode)));
+		}
+		else {
+			Database.insertPerson(new Student(username, password, name));
+		}
+
+		System.out.println("Adding was successful.");
+		UI(mUsername);
+		
+	}
 }
 
 class Student extends Person {
