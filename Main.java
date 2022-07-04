@@ -359,6 +359,46 @@ class Teacher extends Person {
 		Database.viewStudents(username);
 		UI(username);
 	}
+	private static void gradeStudent(String tUsername) {
+		
+		System.out.println("Enter the course's ID:");
+		String id = scan.nextLine();
+		if (Database.isNewCourse(id) == true) {
+			System.out.println("There is no cousre with the given ID.");
+			System.out.println();
+			UI(tUsername);
+			return;
+		}
+		if (Database.doesTeachCourse(tUsername, id) == false) {
+			System.out.println("You are not the Teacher of this course.");
+			System.out.println();
+			UI(tUsername);
+			return;
+		}
+		
+		System.out.println("Enter the student's username:");
+		String username = scan.nextLine();
+		if (Database.isInCourse(username, id) == false) {
+			System.out.println("This student is not in this course.");
+			System.out.println();
+			UI(tUsername);
+			return;
+		}
+		
+		System.out.println("Enter the student's grade:");
+		float grade = Float.parseFloat(scan.nextLine());
+		if (grade > 20 || grade < 0) {
+			System.out.println("Grade should be in range 0-20.");
+			System.out.println();
+			UI(tUsername);
+			return;
+		}
+		
+		Database.insertGrade(username, id, grade);
+		System.out.println("This student's grade is updated successfully.");
+		UI(tUsername);
+		
+	}
 
 	
 }
