@@ -134,7 +134,14 @@ public class Main {
 		return mode;
 
 	}
-
+static String pModeToString(int mode) {
+		if (mode == 1)
+			return "Student";
+		if (mode == 2)
+			return "Teacher";
+		return "Manager";
+		
+	}
 
 
 }
