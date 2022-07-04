@@ -243,4 +243,150 @@ class Database {
 		}
 		
 	}
+	
+//methods for validating inputs
+	
+	//method for checking if an account with username 'username' exists
+	static boolean isNew(String username, int mode) {
+		
+		ResultSet res;
+		int cnt = 0;
+		
+	
+		
+		try {
+			res = stat.executeQuery("select * FROM " + Main.pModeToString(mode) + " WHERE (`ID` = '" + username + "')");
+			
+			while (res.next()) {
+				cnt++;
+			}
+			
+			if (cnt == 0)
+				return true;
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+			
+	}
+	
+	//method for checking if a course with ID 'id' exists
+	static boolean isNewCourse(String id) {
+		
+		ResultSet res;
+		int cnt = 0;
+			
+		try {
+			res = stat.executeQuery("select * FROM course WHERE (`ID` = '" + id + "')");
+			
+			while (res.next()) {
+				cnt++;
+			}
+			
+			if (cnt == 0)
+				return true;
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+					
+	}
+	
+	//method for validating password of an account
+	static boolean checkAccount(String usr, String pass, int mode) {
+		
+		ResultSet res;
+		try {
+			res = stat.executeQuery("select * FROM " + Main.pModeToString(mode) + " WHERE (`ID` = '" + usr + "')");
+			
+			while (res.next()) {
+				if (res.getString("Password").equals(pass))
+					return true;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return false;
+	}
+	
+	static boolean isInCourse(String username, String id) {
+		ResultSet res;
+		int cnt = 0;
+			
+		try {
+			res = stat.executeQuery("select * FROM grade WHERE (`Course_ID` = '" + id + "')");
+			
+			while (res.next()) {
+				if (res.getString("Student_ID").equals(username)) {
+					cnt++;
+				}
+			}
+			
+			if (cnt == 0)
+				return false;
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return true;
+	}
+
+	static boolean isCourseFull(String id) {
+		ResultSet res;
+			
+		try {
+			res = stat.executeQuery("select * FROM course WHERE (`ID` = '" + id + "')");
+			
+			while (res.next()) {
+				if (res.getInt("Capacity") == 0) {
+					return true;
+				}
+				else
+					return false;
+			}
+			
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return true;
+	}
+	
+	static boolean doesTeachCourse(String username, String id) {
+		ResultSet res;
+		int cnt = 0;
+			
+		try {
+			res = stat.executeQuery("select * FROM course WHERE (`ID` = '" + id + "')");
+			
+			while (res.next()) {
+				if (res.getString("Teacher_ID").equals(username)) {
+					cnt++;
+				}
+			}
+			
+			if (cnt == 0)
+				return false;
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return true;
+	}
+
 }
