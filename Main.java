@@ -26,11 +26,20 @@ public class Main {
 	}
 
 
+	// a method for signing in
 	private static void signIn() {
-	
-		int mode = inputOption(3, "1 - Student\n2 - Teacher\n3 - Principal");
-
-	}
+		
+		int mode = inputOption(3, "1 - Student\n2 - Teacher\n3 - Manager");
+		System.out.println("Enter your username:");
+		String username = scan.nextLine();
+		if (Database.isNew(username, mode) == true) {
+			System.out.println("There is not an account with this username in our database. Try again.");
+			System.out.println("\n\n");
+			enter();
+			return;
+			
+		}
+		
 
 	//a method for signing up
 	private static void signUp() {
@@ -44,8 +53,8 @@ public class Main {
 			System.out.println("\n\n");
 			enter();
 			return;
+			}
 		}
-
 	
 		System.out.println("Enter a password:");
 		String password = scan.nextLine();
