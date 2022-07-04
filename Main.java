@@ -464,6 +464,11 @@ class Student extends Person {
 		UI(username);
 		
 	}
+	
+	private static void checkGrades(String username) {
+		Database.checkGrades(username);
+		UI(username);
+	}
 
 	
 }
