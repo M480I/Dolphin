@@ -40,6 +40,29 @@ public class Main {
 			
 		}
 		
+		System.out.println("Enter your password:");
+		String password = scan.nextLine();
+		
+		
+		if (Database.checkAccount(username, password, mode) == false) {
+			System.out.println("Incorrect password. Try again.");
+			System.out.println("\n\n");
+			enter();
+			return;
+		}
+		
+		if (mode == 1) {
+			Student.UI(username);
+		}
+		if (mode == 2) {
+			Teacher.UI(username);
+		}
+		if (mode == 3) {
+			Manager.UI(username);
+		}
+
+	}
+	
 
 	//a method for signing up
 	private static void signUp() {
@@ -53,8 +76,28 @@ public class Main {
 			System.out.println("\n\n");
 			enter();
 			return;
+			}
+		System.out.println("Enter your password:");
+		String password = scan.nextLine();
+		
+		
+		if (Database.checkAccount(username, password, mode) == false) {
+			System.out.println("Incorrect password. Try again.");
+			System.out.println("\n\n");
+			enter();
+			return;
 		}
-
+		
+		if (mode == 1) {
+			Student.UI(username);
+		}
+		if (mode == 2) {
+			Teacher.UI(username);
+		}
+		if (mode == 3) {
+			Manager.UI(username);
+		}
+		}
 	
 		System.out.println("Enter a password:");
 		String password = scan.nextLine();
@@ -114,7 +157,7 @@ public class Main {
 		return mode;
 
 	}
-static String pModeToString(int mode) {
+	static String pModeToString(int mode) {
 		if (mode == 1)
 			return "Student";
 		if (mode == 2)
