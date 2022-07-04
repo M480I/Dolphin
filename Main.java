@@ -31,11 +31,41 @@ public class Main {
 
 	}
 
+	//a method for signing up
 	private static void signUp() {
+		
+		int mode = inputOption(3, "1 - Student\n2 - Teacher\n3 - Manager");
+		
+		System.out.println("Enter a username:");
+		String username = scan.nextLine();
+		if (Database.isNew(username, mode) == false) {
+			System.out.println("The same username already exists. Try again.");
+			System.out.println("\n\n");
+			enter();
+			return;
+		}
 
-		int mode = inputOption(3, "1 - Student\n2 - Teacher\n3 - Principal");
+	
+		System.out.println("Enter a password:");
+		String password = scan.nextLine();
+		
+		System.out.println("Enter your name:");
+		String name = scan.nextLine();
+		
+		if (mode == 2) {
+			int rankMode = inputOption(3, "1 - Assistant Professor\n2 - Associate Professor\n3 - Professor\nChoose:");
+			Database.insertPerson(new Teacher(username, password, name, rModeToString(rankMode)));
+		}
+		if (mode == 1)
+			Database.insertPerson(new Student(username, password, name));
+		if (mode == 3)
+			Database.insertPerson(new Manager(username, password, name));
 
-
+		
+		System.out.println("You are successfuly signed up.");
+		System.out.println("\n\n");
+		enter();
+		
 	}
 
 	// a method that lets users choose between multiple options
