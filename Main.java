@@ -477,6 +477,11 @@ class Student extends Person {
 		System.out.println("Your password is updated.");
 		UI(username);		
 	}
+	private static void getAllCourses(String username) {
+		Database.getAll(2);
+		UI(username);
+	}
+	
 
 
 	
