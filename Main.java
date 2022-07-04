@@ -469,6 +469,15 @@ class Student extends Person {
 		Database.checkGrades(username);
 		UI(username);
 	}
+	private static void changePass(String username) {
+		System.out.println("Enter a password:");
+		String password = scan.nextLine();
+		
+		Database.changePassword(new Student(username, password, ""));
+		System.out.println("Your password is updated.");
+		UI(username);		
+	}
+
 
 	
 }
