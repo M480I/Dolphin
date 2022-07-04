@@ -215,6 +215,70 @@ class Manager extends Person {
 	public Manager(String username, String password, String name) {
 		super(username, password, name);
 	}
+	
+	// brings the UI after signing in with manager role
+	public static void UI(String username) {
+		
+		int mode = Main.inputOption(10,
+				  "\n\n"
+				+ "1 - List students\n"
+				+ "2 - Add student\n"
+				+ "3 - Remove student\n"
+				+ "4 - List teachers\n"
+				+ "5 - Add teacher\n"
+				+ "6 - Remove teacher\n"
+				+ "7 - List courses\n"
+				+ "8 - Add courses\n"
+				+ "9 - Change password\n"
+				+ "10 - Log out\n"
+				+ "Choose:");
+		
+		switch(mode) {
+		case 1:
+			getAllStudents(username);
+			break;
+	
+		case 2:
+			addPerson(1, username);
+			break;
+			
+		case 3:
+			removePerson(1, username);
+			break;		
+			
+		case 4:
+			getAllTeachers(username);
+			break;			
+
+		case 5:
+			addPerson(2, username);
+			break;
+			
+		case 6:
+			removePerson(2, username);
+			break;
+			
+		case 7:
+			getAllCourses(username);
+			break;			
+			
+		case 8:
+			addCourse(username);
+			break;			
+			
+		case 9:
+			changePass(username);
+			break;
+			
+		case 10:
+			System.out.println("loging out...");
+			System.out.println("\n\n");
+			Main.enter();
+			break;		
+			
+		}
+		
+	}
 }
 
 class Student extends Person {
