@@ -399,6 +399,14 @@ class Teacher extends Person {
 		UI(tUsername);
 		
 	}
+		private static void changePass(String username) {
+		System.out.println("Enter a password:");
+		String password = scan.nextLine();
+		
+		Database.changePassword(new Teacher(username, password, "", ""));
+		System.out.println("Your password is updated.");
+		UI(username);			
+	}
 
 	
 }
