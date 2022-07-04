@@ -430,6 +430,42 @@ class Student extends Person {
 		
 	}
 	
+	private static void takeCourse(String username) {
+		
+		System.out.println("Enter an ID:");
+		String id = scan.nextLine();
+		
+		if (Database.isInCourse(username, id) == true) {
+			System.out.println("You are already in this course.");
+			System.out.println();
+			UI(username);
+			return;
+		}
+		if (Database.isNewCourse(id) == true) {
+			System.out.println("There is no cousre with the given ID.");
+			System.out.println();
+			UI(username);
+			return;
+		}
+		if (Database.isCourseFull(id) == true) {
+			System.out.println("The selected course is full.");
+			System.out.println();
+			UI(username);
+			return;
+		}
+		
+		
+		Course c = new Course(id, "", 0, new Teacher(Database.getTeacherID(id), "", "", ""));
+		
+		Database.takeCourse(username, c);
+		
+		System.out.println("You are added to this course.");
+		
+		UI(username);
+		
+	}
+
+	
 }
 
 class Teacher extends Person {
