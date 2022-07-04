@@ -10,20 +10,21 @@ public class Main {
 
 	}
 
-	//entry method
-	private static void enter() {
-
-
-		int mode = inputOption(2, "1 - Sign up\n2 - Sign in\nChoose:");
+	// this method brings the entry page 	
+	static void enter() {
+		
+		int mode = inputOption(3, "1 - Sign up\n2 - Sign in\n3 - Exit \nChoose:");
 
 		if (mode == 1) {
 			signUp();
 		}
-		else
+		if (mode == 2)
 			signIn();
-
+		
+		
 
 	}
+
 
 	private static void signIn() {
 	
