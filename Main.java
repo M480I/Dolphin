@@ -142,6 +142,13 @@ static String pModeToString(int mode) {
 		return "Manager";
 		
 	}
+	static String rModeToString(int mode) {
+		if (mode == 1)
+			return "Assistant Professor";
+		if (mode == 2)
+			return "Associate Professor";
+		return "Professor";
+	}
 
 
 }
