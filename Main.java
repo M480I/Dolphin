@@ -53,28 +53,8 @@ public class Main {
 			System.out.println("\n\n");
 			enter();
 			return;
-			}
-		System.out.println("Enter your password:");
-		String password = scan.nextLine();
-		
-		
-		if (Database.checkAccount(username, password, mode) == false) {
-			System.out.println("Incorrect password. Try again.");
-			System.out.println("\n\n");
-			enter();
-			return;
 		}
-		
-		if (mode == 1) {
-			Student.UI(username);
-		}
-		if (mode == 2) {
-			Teacher.UI(username);
-		}
-		if (mode == 3) {
-			Manager.UI(username);
-		}
-		}
+
 	
 		System.out.println("Enter a password:");
 		String password = scan.nextLine();
