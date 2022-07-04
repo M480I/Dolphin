@@ -289,84 +289,6 @@ class Manager extends Person {
 	System.out.println("Your password is updated.");
 	UI(username);
 	}
-	
-	private static void addCourse(String mUsername) {
-		
-		System.out.println("Enter an ID:");
-		String ID = scan.nextLine();
-		
-		if (Database.isNewCourse(ID) == false) {
-			System.out.println("The same ID already exists. Try again.");
-			System.out.println();
-			UI(mUsername);
-			return;
-		}
-		
-		System.out.println("Enter a name:");
-		String name = scan.nextLine();
-		System.out.println("Enter the capacity:");
-		int capacity = Integer.parseInt(scan.nextLine());
-		
-		System.out.println("Enter the teacher's name:");
-		String teacherName = scan.nextLine();
-		System.out.println("Enter the teacher's username:");
-		String teacherUsername = scan.nextLine();
-		
-		Teacher t = new Teacher(teacherUsername, "", teacherName, "");
-		
-		
-		Course c = new Course(ID, name, capacity, t);
-		
-		Database.insertCourse(c);
-		
-		System.out.println("Adding was successful.");
-		UI(mUsername);
-	}
-	
-	private static void removePerson(int mode, String mUsername) {
-		
-		System.out.println("Enter a username:");
-		String username = scan.nextLine();
-		
-		if(mode == 1) {
-			Database.deletePerson(new Student(username, "", ""));
-		}
-		else {
-			Database.deletePerson(new Teacher(username, "", "", ""));
-		}
-		
-		System.out.println("This username is no longer in database.");
-		UI(mUsername);
-	}
-	
-	private static void addPerson(int mode, String mUsername) {
-
-		System.out.println("Enter a username:");
-		String username = scan.nextLine();
-		if (Database.isNew(username, mode) == false) {
-			System.out.println("The same username already exists. Try again.");
-			System.out.println();
-			UI(mUsername);
-			return;
-		}
-
-		System.out.println("Enter a password:");
-		String password = scan.nextLine();
-		System.out.println("Enter the name:");
-		String name = scan.nextLine();
-
-		if (mode == 2) {
-			int rankMode = Main.inputOption(3, "1 - Assistant Professor\n2 - Associate Professor\n3 - Professor\nChoose:");
-			Database.insertPerson(new Teacher(username, password, name, Main.rModeToString(rankMode)));
-		}
-		else {
-			Database.insertPerson(new Student(username, password, name));
-		}
-
-		System.out.println("Adding was successful.");
-		UI(mUsername);
-		
-	}
 }
 
 class Student extends Person {
@@ -383,14 +305,51 @@ class Teacher extends Person {
 	public Teacher(String username, String password, String name, String rank) {
 		super(username, password, name);
 		this.rank = rank;
-		// TODO Auto-generated constructor stub
 		
 	}
 
 	public String getRank() {
 		return rank;
 	}
+	// brings the UI after signing in with teacher role
+	public static void UI(String username) {
+		
+		int mode = Main.inputOption(5,
+				  "\n\n"
+				+ "1 - List my courses\n"
+				+ "2 - List my students\n"
+				+ "3 - grade student\n"
+				+ "4 - Change password\n"
+				+ "5 - Log out\n"
+				+ "Choose:");
+		
+		switch (mode) {
+			
+		case 1:
+			getAllCourses(username);
+			break;
 	
+		case 2:
+			getAllStudents(username);
+			break;
+			
+		case 3:
+			gradeStudent(username);
+			break;		
+			
+		case 4:
+			changePass(username);
+			break;			
+
+		case 5:
+			System.out.println("loging out...");
+			System.out.println("\n\n");
+			Main.enter();
+			break;			
+		
+		}
+		
+	}
 	
 }
 
