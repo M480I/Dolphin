@@ -350,6 +350,16 @@ class Teacher extends Person {
 		}
 		
 	}
+	private static void getAllCourses(String username) {	
+		Database.checkCourses(username);
+		UI(username);
+	}
+
+	private static void getAllStudents(String username) {
+		Database.viewStudents(username);
+		UI(username);
+	}
+
 	
 }
 
