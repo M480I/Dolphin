@@ -57,7 +57,6 @@ class Database {
 		try {
 			stat.executeUpdate("INSERT INTO course VALUES ('" + c.getId() + "', '" + c.getName() + "', " + c.getCapacity() + ", '" + c.getTeacher().getName() + "', '" + c.getTeacher().getUsername() + "');");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
 		
@@ -70,7 +69,6 @@ class Database {
 		try {
 			stat.executeUpdate("DELETE FROM " + p.getClass().getSimpleName() + " WHERE (`ID` = '" + p.getUsername() + "');");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
